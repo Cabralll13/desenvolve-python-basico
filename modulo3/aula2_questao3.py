@@ -1,0 +1,5 @@
+idade = int(input('Insira sua idade: '))
+quantidadeJogos = bool(input('Já jogou pelo menos 3 jogos de tabuleiro?(true para sim e false para não) '))
+vitorias = int(input('Quantos jogos já venceu? '))
+ingresso = (idade > 15 and idade < 18) and quantidadeJogos and (vitorias > 0)
+print('Apto para ingressar no clube de jogos de tabuleiro: ', ingresso)
