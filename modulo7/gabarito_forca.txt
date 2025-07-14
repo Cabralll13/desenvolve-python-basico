@@ -1,0 +1,10 @@
+forno à lenha\n
+frigideira\n
+panela de pressão\n
+fogão\n
+microondas\n
+colher de madeira\n
+lista de compras\n
+fruteira\n
+geladeira\n
+jantar\n
