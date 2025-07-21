@@ -34,6 +34,15 @@ def carregarDados(caminhoArquivo):
 def salvaDados(caminhoArquivo, dados):
     # salva uma lista de dicionários em um arquivo CSV
     if not dados:
+        cabecalho = []
+        if 'usuarios' in caminhoArquivo:
+            cabecalho = ['idUsuario', 'username', 'password', 'role']
+        elif 'produtos' in caminhoArquivo:
+            cabecalho = ['idProduto', 'nome', 'preco', 'quantidade']
+        
+        with open(caminhoArquivo, mode='w', newline='', encoding='utf-8') as arquivo:
+            escritor = csv.writer(arquivo)
+            escritor.writerow(cabecalho)
         return
 
     cabecalho = dados[0].keys()
@@ -160,6 +169,7 @@ def criarProdutos(listaProdutos):
     # cria um novo produto
     print('\nCadastro de novo produto')
     nome = input('Nome do produto: ')
+    
     preco = float(input('Preço do produto: '))
     quantidade = int(input('Quantidade em estoque: '))
 
@@ -207,10 +217,11 @@ def atualizarProduto(listaProdutos, usuarioLogado):
     if usuarioLogado['role'] == 'admin':
         novoNome = input(
             f"Novo nome (deixe em branco para manter '{produtoEncontrado['nome']}'): ")
-        novoPrecoSTR = input(
-            f"Novo preço (deixe em branco para manter '{produtoEncontrado['preco']}'): ")
         if novoNome:
             produtoEncontrado['nome'] = novoNome
+        
+        novoPrecoSTR = input(
+            f"Novo preço (deixe em branco para manter '{produtoEncontrado['preco']}'): ")
         if novoPrecoSTR:
             produtoEncontrado['preco'] = float(novoPrecoSTR)
 
@@ -218,6 +229,7 @@ def atualizarProduto(listaProdutos, usuarioLogado):
         f"Nova quantidade (deixe em branco para manter '{produtoEncontrado['quantidade']}'): ")
     if novaQuantidadeSTR:
         produtoEncontrado['quantidade'] = int(novaQuantidadeSTR)
+            
     print('Produto atualizado com sucesso!')
 
 
@@ -402,7 +414,7 @@ while True:
                         break
                     else:
                         print("Opção inválida.")
-
+                
                 input("\nPressione Enter para continuar...")
 
     elif opcaoInicial == '2':
